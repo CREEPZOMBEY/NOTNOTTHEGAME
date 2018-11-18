@@ -8,6 +8,14 @@ echo startstoppuhr > startstoppuhr.0file
 exit
 :nachvorgame
 FOR /f %%f IN (games.stat) DO set /A games=%%f+1 && echo %games% > games.stat
+:first
+cls
+echo.
+echo ________________________________________________________________
+echo                             Start
+echo ________________________________________________________________
+pause >nul
+echo start > start.0file
 :GAME
 cls
 SET /A Auswahl=%RANDOM% * 4 / 32768 + 1
@@ -60,20 +68,18 @@ del start.0file
 cls
 echo.
 echo.
-echo                            Du hast verloren
-echo                            Deine Punktzahl: %var1%
+echo                          Du hast verloren
+echo                          Deine Punktzahl: %var1%
 
-FOR /f %%f IN (zeit.txt) DO echo                            Deine Zeit: %%f
+FOR /f %%f IN (zeit.txt) DO echo                          Deine Zeit: %%f
 FOR /f %%f IN (zeit.txt) DO set zeit=%%f
 
-FOR /f %%f IN (allzeit.stat) DO set gesamtzeit=%%f && set /a gesamt=%gesamtzeit%+%zeit%
-echo %gesamt%> allzeit.stat
-FOR /f %%f IN (allpoints.stat) DO set var2=%%f && set /a var3=%var2%+%var1%
-echo %var3%> allpoints.stat
+FOR /f %%a IN (allzeit.stat) DO set /a gesamt=%gesamtzeit% + %%a
+echo %gesamt% > allzeit.stat
+FOR /f %%g IN (allpoints.stat) DO set /a var3=%var1% + %%g
+echo %var3% > allpoints.stat
 FOR /f %%i IN (games.stat) DO set /a games=%%i+1 && echo %games% > games.stat
 del zeit.txt
-echo                               Wiederholen?
-echo                     Dann druecke eine beliebige Taste
 pause>nul
 set /a var1=0
 goto vorgame

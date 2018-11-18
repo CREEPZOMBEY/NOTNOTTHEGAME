@@ -5,7 +5,7 @@ title Launcher
 
 cls
 echo ______________________________________________________________________
-FOR /f %%f IN (Version.0file)Do echo /    NOT NOT The Game                Version: %%f                 \
+FOR /f %%f IN (Version.0file)Do echo /    NOT NOT The Game                Version: %%f                \
 echo \                                                                    /
 echo /                                                                    \
 echo \                                                                    /
@@ -34,16 +34,18 @@ goto start
 :Launch
 mode con lines=1 cols=20
 start stoppuhr.bat
-timeout -t 0 >nul
+timeout -t 0 -nobreak >nul
+start leer.bat
+timeout -t 0 -nobreak >nul
 start NotNot.bat
 :algorythmus
-if exist "startstoppuhr.0file" del startstoppuhr.0file && start stoppuhr.bat && timeout -t 0 >nul && start NotNot.bat
+if exist "startstoppuhr.0file" del startstoppuhr.0file && start stoppuhr.bat && timeout -t 0 >nul && start leer.bat && timeout -t 0 >nul && start NotNot.bat
 timeout -t 1 >nul
 goto algorythmus
 :Ranking
 cls
 echo ______________________________________________________________________
-FOR /f %%f IN (Version.0file)Do echo /    NOT NOT The Game                Version: %%f                 \
+FOR /f %%f IN (Version.0file)Do echo /    NOT NOT The Game                Version: %%f                \
 echo \                              Ranking                               /
 echo /                                                                    \
 echo \                                                                    /
@@ -98,7 +100,7 @@ echo \
 echo /                                                                    
 echo \                                                                    
 echo /                                                                    
-echo \                                                                    
+echo \                   ! ALLE WERTE SIND GERUNDET !
 echo ______________________________________________________________________
 pause>nul
 goto start
