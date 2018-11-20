@@ -55,8 +55,8 @@ echo /                                                                    \
 echo \                                                                    /
 echo /  Statistiken: S          Update: U               Ranking: R        \
 echo \                                                                    /
-echo /  Info: Beta endet mit der Beta Version 99                          \
-echo \        (dem Finalen Release der Ranking-funktion)                  /
+echo /  Info: Beta endet nach der Beta Version 99                         \
+echo \        (dem Finalen Release der Online-funktion)                   /
 echo /                                                                    \
 echo \                                                                    /
 echo /                                                                    \
