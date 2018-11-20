@@ -1,4 +1,4 @@
-@echo off
+﻿@echo off
 mode con lines=7 cols=64
 set var1=0
 title NOT NOT The GAME
@@ -7,8 +7,10 @@ goto nachvorgame
 echo startstoppuhr > startstoppuhr.0file
 exit
 :nachvorgame
+@echo off
 FOR /f %%f IN (games.stat) DO set /A games=%%f+1 && echo %games% > games.stat
 :first
+@echo off
 cls
 echo.
 echo ________________________________________________________________
@@ -74,12 +76,28 @@ echo                          Deine Punktzahl: %var1%
 FOR /f %%f IN (zeit.txt) DO echo                          Deine Zeit: %%f
 FOR /f %%f IN (zeit.txt) DO set zeit=%%f
 
-FOR /f %%a IN (allzeit.stat) DO set /a gesamt=%gesamtzeit% + %%a
+FOR /f %%a IN (allzeit.stat) DO set /a gesamt=%%a + %zeit%
 echo %gesamt% > allzeit.stat
 FOR /f %%g IN (allpoints.stat) DO set /a var3=%var1% + %%g
 echo %var3% > allpoints.stat
 FOR /f %%i IN (games.stat) DO set /a games=%%i+1 && echo %games% > games.stat
 del zeit.txt
+FOR /f %%n IN (name.0file) DO set name=%%n
+echo user pi raspberry >> ftp1.ftp
+echo bin >> ftp1.ftp
+echo cd Programmieren >> ftp1.ftp
+echo cd Batch >> ftp1.ftp
+echo cd "NOT NOT The Game" >> ftp1.ftp
+echo cd bin >> ftp1.ftp
+echo cd Stats >> ftp1.ftp
+echo cd %name% >> ftp1.ftp
+echo put allpoints.stat >> ftp1.ftp
+echo put allzeit.stat >> ftp1.ftp
+echo put timestat.stat >> ftp1.ftp
+echo put games.stat >> ftp1.ftp
+echo quit >> ftp1.ftp
+ftp -n -s:ftp1.ftp 192.168.1.149 >nul
+del ftp1.ftp
 pause>nul
 set /a var1=0
 goto vorgame
